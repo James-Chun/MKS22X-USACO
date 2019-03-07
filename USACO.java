@@ -21,16 +21,29 @@ public class USACO{
     int[][] pasture = new int[R][C]; //making pasture from first line
 
     for (int r=0;r<pasture.length;r++){
-      directions.nextLine();
       for (int c=0;c<pasture[r].length;c++){
         pasture[r][c]=directions.nextInt();
       }
     }
 
-
-
-    return pasture[3][2];
+    return bronzeHelper(directions.nextInt(),directions.nextInt(),directions.nextInt(), N);
   }
+
+
+  private int bronzeHelper(int row, int col, int depth, int orders){
+    if(N==0)return calculateDepth();
+    return 1;
+  }
+
+  private int calculateDepth(){
+    int sum = 0;
+    for (int[] c:n){
+      sum +=n;
+    }
+  }
+
+
+
 
   public static int silver(String filename){
     return 1;
