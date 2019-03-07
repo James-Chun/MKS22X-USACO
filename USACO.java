@@ -12,17 +12,24 @@ public class USACO{
     File imput = new File(filename);
     Scanner directions = new Scanner(imput);
 
-    String temp = directions.nextLine();
-    int R = Integer.parseInt(temp.substring(0,1));    //setting variables with values from first line
-    int C = Integer.parseInt(temp.substring(2,3));
-    int E = Integer.parseInt(temp.substring(4,5));
-    int N = Integer.parseInt(temp.substring(6,7));
+    //String temp = directions.nextLine();
+    int R = directions.nextInt();    //setting variables with values from first line
+    int C = directions.nextInt();
+    int E = directions.nextInt();
+    int N = directions.nextInt();
 
     int[][] pasture = new int[R][C]; //making pasture from first line
 
+    for (int r=0;r<pasture.length;r++){
+      directions.nextLine();
+      for (int c=0;c<pasture[r].length;c++){
+        pasture[r][c]=directions.nextInt();
+      }
+    }
 
 
-    return pasture[0].length;
+
+    return pasture[3][2];
   }
 
   public static int silver(String filename){
