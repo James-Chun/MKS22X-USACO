@@ -32,6 +32,9 @@ public class USACO{
 
   private int bronzeHelper(int row, int col, int depth, int orders){
     if(N==0)return calculateDepth();
+    for (int i =0;i<3;i++){
+      //using corner coord access each cow by adding int to coords
+    }
     return 1;
   }
 
@@ -40,6 +43,7 @@ public class USACO{
     for (int[] c:n){
       sum +=n;
     }
+    return sum*72*72;
   }
 
 
