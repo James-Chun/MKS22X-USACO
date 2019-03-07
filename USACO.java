@@ -13,7 +13,15 @@ public class USACO{
     Scanner directions = new Scanner(imput);
 
     String temp = directions.nextLine();
-    int [][] pasture = new int[Integer.parseInt(temp.substring(0,1))][Integer.parseInt(temp.substring(2,3))];
+    int R = Integer.parseInt(temp.substring(0,1));    //setting variables with values from first line
+    int C = Integer.parseInt(temp.substring(2,3));
+    int E = Integer.parseInt(temp.substring(4,5));
+    int N = Integer.parseInt(temp.substring(6,7));
+
+    int[][] pasture = new int[R][C]; //making pasture from first line
+
+
+
     return pasture[0].length;
   }
 
