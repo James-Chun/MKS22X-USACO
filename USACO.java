@@ -28,26 +28,28 @@ public class USACO{
 
 
     while (N>0){  //going through all directions using N (number of directions)
-      int largest = pasture[directions.nextInt()-1][directions.nextInt()-1];
-      int d = directions.nextInt()-1;
+      int row = directions.nextInt()-1;
+      int col = directions.nextInt()-1;
+      int largest = pasture[row][col];
+      int d = directions.nextInt();
       for (int r=0;r<3;r++){
         for (int c=0;c<3;c++){
-          if (pasture[r][c]>largest )largest = pasture[r][c];
+          if (pasture[r+row][c+col]>largest )largest = pasture[r+row][c+col];
         }
       }
       for (int r=0;r<3;r++){
         for (int c=0;c<3;c++){
-          if (pasture[r][c]>largest-d) pasture[r][c] = largest - d;
+          if (pasture[r+row][c+col]>largest-d) pasture[r+row][c+col] = largest - d;
         }
       }
       N--;
 
     }
 
-    for (int r=0;r<3;r++){
-      for (int c=0;c<3;c++){
-        if (pasture[r][c]-E<0 )pasture[r][c]=0;
-        else pasture[r][c]=pasture[r][c]-E;
+    for (int r=0;r<pasture.length;r++){
+      for (int c=0;c<pasture[r].length;c++){
+        if (pasture[r][c] - E < 0 )pasture[r][c] = -1 * (pasture[r][c]-E);
+        else pasture[r][c]=0;
       }
     }
 
@@ -57,7 +59,7 @@ public class USACO{
         sum+=pasture[r][c];
       }
     }
-    return sum*72*22;
+    return sum*72*72;
   }
 
   private static void dig(int row, int col, int depth){
