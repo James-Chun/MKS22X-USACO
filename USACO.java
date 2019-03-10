@@ -7,6 +7,8 @@ public class USACO{
   private int C;
   private int E;
   private int N;
+  private int r;
+  private int c;
 
   public static int bronze(String filename) throws FileNotFoundException{
     File imput = new File(filename);
@@ -18,30 +20,41 @@ public class USACO{
     int E = directions.nextInt();
     int N = directions.nextInt();
 
-    int[][] pasture = new int[R][C]; //making pasture from first line
+    int[][] pasture = new int[R][C]; //making pasture from values in first line
 
     for (int r=0;r<pasture.length;r++){
-      for (int c=0;c<pasture[r].length;c++){
+      for (int c=0;c<pasture[r].length;c++){  //adding values to pasture from the big block of numbers
         pasture[r][c]=directions.nextInt();
       }
     }
 
-    return bronzeHelper(directions.nextInt(),directions.nextInt(),directions.nextInt(), N);
+    while (N>0){  //going through all directions using N (number of directions)
+      r = directions.nextInt();
+      c = directions.nextInt();
+
+    }
+
+    return directions.nextInt();
   }
 
-
-  private int bronzeHelper(int row, int col, int depth, int orders){
-    if(N==0)return calculateDepth();
-    for (int i =0;i<3;i++){
-      //using corner coord access each cow by adding int to coords
+  private void dig(int row, int col){
+    int largest = pasture[row][col];
+    int smallest = pasture[row][col];
+    for (int r=0;r<3;r++){
+      for (int c=0;c<3;c++){
+        if (pasture[r][c]>largest)largest=pasture[r][c];
+        if (pasture[r][c]<smallest)smallest=pasture[r][c];
+      }
     }
-    return 1;
+
   }
 
   private int calculateDepth(){
     int sum = 0;
-    for (int[] c:n){
-      sum +=n;
+    for (int r=0;r<pasture.length;r++){
+      for (int c=0;c<pasture[r].length;c++){
+        sum+=pasture[r][c];
+      }
     }
     return sum*72*72;
   }
