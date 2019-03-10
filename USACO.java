@@ -90,7 +90,7 @@ public class USACO{
 
 
 
-  public static String silver(String filename) throws FileNotFoundException{
+  public static int silver(String filename) throws FileNotFoundException{
       File imput = new File(filename);  //scanning file
       Scanner directions = new Scanner(imput);
 
@@ -100,23 +100,16 @@ public class USACO{
 
       char[][] pastureSilver = new char[N][M]; //making pasture from values in first line
 
-      for (int r=0;r<pastureSilver.length;r++){
-        String line = directions.nextLine();
-          for (int c=0;c<pastureSilver[r].length;c++){  //adding values to pasture from the big block of numbers
-              pastureSilver[r][c]='*';
+      String line = directions.nextLine();
+
+      for (int r=0;r<N;r++){
+      line = directions.nextLine();
+          for (int c=0;c<M;c++){  //adding values to pasture from the big block of numbers
+              pastureSilver[r][c]= line.charAt(c);
           }
       }
 
-      String visual = "";
-
-      for (int r=0;r<pastureSilver.length;r++){
-          for (int c=0;c<pastureSilver[r].length;c++){  //adding values to pasture from the big block of numbers
-              visual += pastureSilver[r][c];
-          }
-          visual += "\n";
-      }
-
-      return visual;
+      return directions.nextInt();
   }
 
 
