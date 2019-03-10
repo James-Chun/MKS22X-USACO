@@ -2,6 +2,8 @@ import java.util.*;
 import java.io.*;
 
 public class USACO{
+  private static int[][] pastureBronze;
+  private static char[][] pastureSilver;
 
 
   public static int bronze(String filename) throws FileNotFoundException{
@@ -88,7 +90,7 @@ public class USACO{
 
 
 
-  public static int silver(String filename){
+  public static String silver(String filename) throws FileNotFoundException{
       File imput = new File(filename);  //scanning file
       Scanner directions = new Scanner(imput);
 
@@ -96,22 +98,30 @@ public class USACO{
       int M = directions.nextInt();    //N is amount of rows, M is amount of columns
       int T = directions.nextInt();    //T is time
 
-      char[][] pastureSilver = new int[R][C]; //making pasture from values in first line
+      char[][] pastureSilver = new char[N][M]; //making pasture from values in first line
 
       for (int r=0;r<pastureSilver.length;r++){
         String line = directions.nextLine();
           for (int c=0;c<pastureSilver[r].length;c++){  //adding values to pasture from the big block of numbers
-              pastureSilver[r][c]=line.charAt(c);
+              pastureSilver[r][c]='*';
           }
       }
 
+      String visual = "";
 
-      return 1;
+      for (int r=0;r<pastureSilver.length;r++){
+          for (int c=0;c<pastureSilver[r].length;c++){  //adding values to pasture from the big block of numbers
+              visual += pastureSilver[r][c];
+          }
+          visual += "\n";
+      }
+
+      return visual;
   }
 
 
 
-  public int solve(){
+  /*public int solve(){
             int row=0;                             //find the location of the S.
             int col=0;                             //erase the S
             for (int i1=0;i1<maze.length;i1++){    //and start solving at the location of the s.
@@ -136,7 +146,7 @@ public class USACO{
           All visited spots that were not part of the solution are changed to '.'
           All visited spots that are part of the solution are changed to '@'
       */
-      private boolean solve(int row, int col){ //solve helper
+    /*  private boolean solve(int row, int col){ //solve helper
 
 
 
@@ -151,7 +161,7 @@ public class USACO{
           }
           return false;
       }
-
+*/
 
 
 
@@ -159,7 +169,7 @@ public class USACO{
 
   public static void main(String[] args){
     try{
-      System.out.println(bronze(args[0]));
+      System.out.println(silver(args[0]));
     }catch(FileNotFoundException e){
       System.out.println("File Not Found");
     }
