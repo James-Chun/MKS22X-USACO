@@ -7,8 +7,6 @@ public class USACO{
   private int C;
   private int E;
   private int N;
-  private int r;
-  private int c;
 
   public static int bronze(String filename) throws FileNotFoundException{
     File imput = new File(filename);
@@ -29,23 +27,25 @@ public class USACO{
     }
 
     while (N>0){  //going through all directions using N (number of directions)
-      r = directions.nextInt();
-      c = directions.nextInt();
-
+      dig(directions.nextInt(),directions.nextInt(),directions.nextInt());
     }
 
-    return directions.nextInt();
+    return calculateDepth();
   }
 
-  private void dig(int row, int col){
+  private void dig(int row, int col, int depth){
     int largest = pasture[row][col];
-    int smallest = pasture[row][col];
     for (int r=0;r<3;r++){
       for (int c=0;c<3;c++){
-        if (pasture[r][c]>largest)largest=pasture[r][c];
-        if (pasture[r][c]<smallest)smallest=pasture[r][c];
+        if (pasture[r][c]>largest )largest = pasture[r][c];
       }
     }
+    for (int r=0;r<3;r++){
+      for (int c=0;c<3;c++){
+        if (pasture[r][c]>largest-depth) pasture[r][c] = largest - depth;
+      }
+    }
+
 
   }
 
