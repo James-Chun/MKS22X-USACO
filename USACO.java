@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 public class USACO{
-  private int[][] pasture;
+  private static int[][] pasture;
   private int R;
   private int C;
   private int E;
@@ -26,15 +26,42 @@ public class USACO{
       }
     }
 
+
     while (N>0){  //going through all directions using N (number of directions)
-      dig(directions.nextInt(),directions.nextInt(),directions.nextInt());
+      int largest = pasture[directions.nextInt()-1][directions.nextInt()-1];
+      int d = directions.nextInt()-1;
+      for (int r=0;r<3;r++){
+        for (int c=0;c<3;c++){
+          if (pasture[r][c]>largest )largest = pasture[r][c];
+        }
+      }
+      for (int r=0;r<3;r++){
+        for (int c=0;c<3;c++){
+          if (pasture[r][c]>largest-d) pasture[r][c] = largest - d;
+        }
+      }
+      N--;
+
     }
 
-    return calculateDepth();
+    for (int r=0;r<3;r++){
+      for (int c=0;c<3;c++){
+        if (pasture[r][c]-E<0 )pasture[r][c]=0;
+        else pasture[r][c]=pasture[r][c]-E;
+      }
+    }
+
+    int sum = 0;
+    for (int r=0;r<pasture.length;r++){
+      for (int c=0;c<pasture[r].length;c++){
+        sum+=pasture[r][c];
+      }
+    }
+    return sum*72*22;
   }
 
-  private void dig(int row, int col, int depth){
-    int largest = pasture[row][col];
+  private static void dig(int row, int col, int depth){
+    int largest = USACO.pasture[row][col];
     for (int r=0;r<3;r++){
       for (int c=0;c<3;c++){
         if (pasture[r][c]>largest )largest = pasture[r][c];
@@ -49,14 +76,8 @@ public class USACO{
 
   }
 
-  private int calculateDepth(){
-    int sum = 0;
-    for (int r=0;r<pasture.length;r++){
-      for (int c=0;c<pasture[r].length;c++){
-        sum+=pasture[r][c];
-      }
-    }
-    return sum*72*72;
+  private static int calculateDepth(){
+    return 1;
   }
 
 
