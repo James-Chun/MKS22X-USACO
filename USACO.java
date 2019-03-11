@@ -109,7 +109,7 @@ public class USACO{
           }
       }
 
-      return silverHelper(pasture,directions.nextInt(),directions.nextInt(),directions.nextInt(),directions.nextInt(),T);
+      return silverHelper(pastureSilver,directions.nextInt(),directions.nextInt(),directions.nextInt(),directions.nextInt(),T);
   }
 
 
