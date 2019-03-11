@@ -115,14 +115,11 @@ public class USACO{
 
 
   private static int silverHelper(String[][] pasture, int startR, int startC, int endR, int endC, int t) {
-    int[] moves = new int[] {1, 0, -1, 0, 0, 1, 0, -1};
+    int[] moves = new int[] {-1, 0, 1, 0, 0, -1, 0, 1};
     int routes = 0;
     if (t == 0) {
-      if (startR == endR && startC == endC) {
-        return 1;
-      } else {
-        return 0;
-      }
+      if (startR == endR && startC == endC) return 1; 
+      else{  return 0;}
     }
     for (int m = 0; m<moves.length; m+=2) {
       if (startC + moves[m+1] >= 0 &&startR+ moves[m]>= 0 && startR + moves[m] < pasture.length &&startC + moves[m+1] < pasture[0].length && pasture[startR+ moves[m]][startC + moves[m+1]].equals(".")) {
