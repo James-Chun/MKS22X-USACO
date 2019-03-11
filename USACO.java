@@ -114,48 +114,23 @@ public class USACO{
 
 
 
-  /*public int solve(){
-            int row=0;                             //find the location of the S.
-            int col=0;                             //erase the S
-            for (int i1=0;i1<maze.length;i1++){    //and start solving at the location of the s.
-              for (int i2=0;i2<maze[i1].length;i2++){
-                if (maze[i1][i2]=='S'){
-                  row=i1; col=i2; maze[i1][i2]='@';
-                }
-              }
-            }
-            if (solve(row,col))return count();    //depending on whether solve helper returns true or false;
-            return -1;
+  private static int silverHelper(String[][] pasture, int startR, int startC, int endR, int endC, int t) {
+    int[] moves = new int[] {1, 0, -1, 0, 0, 1, 0, -1};
+    int routes = 0;
+    if (t == 0) {
+      if (startR == endR && startC == endC) {
+        return 1;
+      } else {
+        return 0;
       }
-
-
-      /*
-        Recursive Solve function:
-        A solved maze has a path marked with '@' from S to E.
-        Returns the number of @ symbols from S to E when the maze is solved,
-        Returns -1 when the maze has no solution.
-        Postcondition:
-          The S is replaced with '@' but the 'E' is not.
-          All visited spots that were not part of the solution are changed to '.'
-          All visited spots that are part of the solution are changed to '@'
-      */
-    /*  private boolean solve(int row, int col){ //solve helper
-
-
-
-          for (int i=0;i<moves.length;i++){   //looping through all possible moves (moves[][])
-            if (maze[row+moves[i][0]][col+moves[i][1]]=='E')return true;   //check the spaces ahead of current position for E
-            if (maze[row+moves[i][0]][col+moves[i][1]]!='#' && maze[row+moves[i][0]][col+moves[i][1]]!='@' && maze[row+moves[i][0]][col+moves[i][1]]!='.'){
-              maze[row+moves[i][0]][col+moves[i][1]]='@';
-              if (solve(row+moves[i][0],col+moves[i][1]))return true;
-              maze[row+moves[i][0]][col+moves[i][1]]='.';
-            }
-
-          }
-          return false;
+    }
+    for (int m = 0; m<moves.length; m++) {
+      if (startC + moves[m+1] >= 0 &&startR+ moves[m]>= 0 && startR + moves[m] < pasture.length &&startC + moves[m+1] < pasture[0].length && pasture[startR+ moves[m]][startC + moves[m+1]].equals(".")) {
+        routes = routes + silverHelper(pasture, startR + moves[m], startC+moves[m+1], endR, endC, t- 1);
       }
-*/
-
+    }
+    return routes;
+  }
 
 
 
