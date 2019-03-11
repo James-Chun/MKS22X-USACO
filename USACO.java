@@ -109,7 +109,7 @@ public class USACO{
           }
       }
 
-      return directions.nextInt();
+      return silverHelper(pasture,directions.nextInt(),directions.nextInt(),directions.nextInt(),directions.nextInt(),T);
   }
 
 
@@ -124,7 +124,7 @@ public class USACO{
         return 0;
       }
     }
-    for (int m = 0; m<moves.length; m++) {
+    for (int m = 0; m<moves.length; m+=2) {
       if (startC + moves[m+1] >= 0 &&startR+ moves[m]>= 0 && startR + moves[m] < pasture.length &&startC + moves[m+1] < pasture[0].length && pasture[startR+ moves[m]][startC + moves[m+1]].equals(".")) {
         routes = routes + silverHelper(pasture, startR + moves[m], startC+moves[m+1], endR, endC, t- 1);
       }
