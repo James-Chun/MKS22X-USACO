@@ -111,49 +111,46 @@ public class USACO{
          for (int c=0;c<M;c++){  //adding values to pasture from the big block of numbers
              if (line.charAt(c)=='*'){
                 pastureSilver[r][c]=-1;
-             }
-             else{pastureSilver[r][c]=0;}
+            }
+            else{pastureSilver[r][c]=0;}
+            //System.out.print(line.charAt(c));
          }
      }
 
-     pastureSilver[directions.nextInt()-1][directions.nextInt()-1]=1;
+     int startR=directions.nextInt()-1;
+     int startC=directions.nextInt()-1;
+     pastureSilver[startR][startC]=1;
      temp1=pastureSilver.clone();
 
-     int endR=directions.nextInt()-1;
-     int endC=directions.nextInt()-1;
 
-     for (int t=0; t<T;t++){
-         for (int r=0;r<pastureSilver.length;r++){
-            for (int c=0;c<pastureSilver[r].length;c++){
-                if (pastureSilver[r][c]==1){
-                    if (r<pastureSilver.length-1){
-                        temp1[r+1][c]+=1;
-                    }
-                    if (r>0){
-                        temp1[r-1][c]+=1;
-                    }
-                    if (c<pastureSilver[r].length-1){
-                        temp1[r][c+1]+=1;
-                    }
-                    if (c>0){
-                        temp1[r][c-1]+=1;
-                    }
-                    temp1[r][c]=0;
-                }
-            }
-         }
-         temp1=pastureSilver.clone();
-      }
+     System.out.println(visual(temp1));
+     System.out.println(visual(pastureSilver));
 
-     return pastureSilver[endR][endC];
+         /*for (int r1=0;r1<temp1.length;r1++){
+           for (int c1=0;c1<temp1[r1].length;c1++){
+             pastureSilver[r1][c1]=temp1[r1][c1];
+           }
+         }*/
+      //}
+
+     return pastureSilver[0][0];
  }
 
 
- public static String visual(){
-   return "s";
+ public static String visual(int[][] t){
+   String visual = "";
+   for (int r=0;r<t.length;r++){
+     for (int c=0;c<t[r].length;c++){
+       visual = visual +t[r][c] + " ";
+     }
+     visual+="\n";
+   }
+   return visual;
  }
 
+private static void copy(){
 
+}
 
 
   public static void main(String[] args){
