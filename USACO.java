@@ -119,13 +119,33 @@ public class USACO{
      pastureSilver[directions.nextInt()-1][directions.nextInt()-1]=1;
      temp1=pastureSilver.clone();
 
-     for (int r=0;r<temp1.length;r++){
-       for (int c=0;c<temp1[r].length;c++){
-         pastureSilver[r][c]=temp1[r][c];
-       }
-     }
+     int endR=directions.nextInt()-1;
+     int endC=directions.nextInt()-1;
 
-     return pastureSilver[directions.nextInt()-1][directions.nextInt()-1];
+     for (int t=0; t<T;t++){
+         for (int r=0;r<pastureSilver.length;r++){
+            for (int c=0;c<pastureSilver[r].length;c++){
+                if (pastureSilver[r][c]==1){
+                    if (r<pastureSilver.length-1){
+                        temp1[r+1][c]+=1;
+                    }
+                    if (r>0){
+                        temp1[r-1][c]+=1;
+                    }
+                    if (c<pastureSilver[r].length-1){
+                        temp1[r][c+1]+=1;
+                    }
+                    if (c>0){
+                        temp1[r][c-1]+=1;
+                    }
+                    temp1[r][c]=0;
+                }
+            }
+         }
+         temp1=pastureSilver.clone();
+      }
+
+     return pastureSilver[endR][endC];
  }
 
 
