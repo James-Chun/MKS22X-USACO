@@ -3,7 +3,9 @@ import java.io.*;
 
 public class USACO{
   private static int[][] pastureBronze;
-  private static char[][] pastureSilver;
+  private static int[][] pastureSilver;
+  private static int[][] temp1;
+  private static int[][] temp2;
 
 
   public static int bronze(String filename) throws FileNotFoundException{
@@ -91,43 +93,45 @@ public class USACO{
 
 
   public static int silver(String filename) throws FileNotFoundException{
-      File imput = new File(filename);  //scanning file
-      Scanner directions = new Scanner(imput);
+     File imput = new File(filename);  //scanning file
+     Scanner directions = new Scanner(imput);
 
-      int N = directions.nextInt();    //setting variables with values from first line
-      int M = directions.nextInt();    //N is amount of rows, M is amount of columns
-      int T = directions.nextInt();    //T is time
+     int N = directions.nextInt();    //setting variables with values from first line
+     int M = directions.nextInt();    //N is amount of rows, M is amount of columns
+     int T = directions.nextInt();    //T is time
 
-      char[][] pastureSilver = new char[N][M]; //making pasture from values in first line
+     int[][] pastureSilver = new int[N][M]; //making pasture from values in first line
+     int[][] temp1 = new int[N][M];
+     int[][] temp2 = new int[N][M];
 
-      String line = directions.nextLine();
+     String line = directions.nextLine();
 
-      for (int r=0;r<N;r++){
-      line = directions.nextLine();
-          for (int c=0;c<M;c++){  //adding values to pasture from the big block of numbers
-              pastureSilver[r][c]= line.charAt(c);
-          }
-      }
+     for (int r=0;r<N;r++){
+     line = directions.nextLine();
+         for (int c=0;c<M;c++){  //adding values to pasture from the big block of numbers
+             if (line.charAt(c)=='*'){
+                pastureSilver[r][c]=-1;
+             }
+             else{pastureSilver[r][c]=0;}
+         }
+     }
 
-      return silverHelper(pastureSilver,directions.nextInt(),directions.nextInt(),directions.nextInt(),directions.nextInt(),T);
-  }
+     pastureSilver[directions.nextInt()-1][directions.nextInt()-1]=1;
+     temp1=pastureSilver.clone();
+
+     for (int r=0;r<temp1.length;r++){
+       for (int c=0;c<temp1[r].length;c++){
+         pastureSilver[r][c]=temp1[r][c];
+       }
+     }
+
+     return pastureSilver[directions.nextInt()-1][directions.nextInt()-1];
+ }
 
 
-
-  private static int silverHelper(String[][] pasture, int startR, int startC, int endR, int endC, int t) {
-    int[] moves = new int[] {-1, 0, 1, 0, 0, -1, 0, 1};
-    int routes = 0;
-    if (t == 0) {
-      if (startR == endR && startC == endC) return 1; 
-      else{  return 0;}
-    }
-    for (int m = 0; m<moves.length; m+=2) {
-      if (startC + moves[m+1] >= 0 &&startR+ moves[m]>= 0 && startR + moves[m] < pasture.length &&startC + moves[m+1] < pasture[0].length && pasture[startR+ moves[m]][startC + moves[m+1]].equals(".")) {
-        routes = routes + silverHelper(pasture, startR + moves[m], startC+moves[m+1], endR, endC, t- 1);
-      }
-    }
-    return routes;
-  }
+ public static String visual(){
+   return "s";
+ }
 
 
 
