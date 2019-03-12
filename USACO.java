@@ -4,8 +4,6 @@ import java.io.*;
 public class USACO{
   private static int[][] pastureBronze;
   private static int[][] pastureSilver;
-  private static int[][] temp1;
-  private static int[][] temp2;
 
 
   public static int bronze(String filename) throws FileNotFoundException{
@@ -91,57 +89,77 @@ public class USACO{
 
 
 
-
   public static int silver(String filename) throws FileNotFoundException{
-     File imput = new File(filename);  //scanning file
-     Scanner directions = new Scanner(imput);
+    File imput = new File(filename);  //scanning file
+    Scanner directions = new Scanner(imput);
 
-     int N = directions.nextInt();    //setting variables with values from first line
-     int M = directions.nextInt();    //N is amount of rows, M is amount of columns
-     int T = directions.nextInt();    //T is time
+    int N = directions.nextInt();    //setting variables with values from first line
+    int M = directions.nextInt();    //N is amount of rows, M is amount of columns
+    int T = directions.nextInt();    //T is time
 
-     int[][] pastureSilver = new int[N][M]; //making pasture from values in first line
-     int[][] temp1 = new int[N][M];
-     int[][] temp2 = new int[N][M];
+    int[][] pastureSilver = new int[N][M]; //making pasture from values in first line
+    int[][] temp1 = new int[N][M];
+    int[][] temp2 = new int[N][M];
 
-     String line = directions.nextLine();
+    String line = directions.nextLine();
 
-     for (int r=0;r<N;r++){
-     line = directions.nextLine();
-         for (int c=0;c<M;c++){  //adding values to pasture from the big block of numbers
-             if (line.charAt(c)=='*'){
-                pastureSilver[r][c]=-1;
-            }
-            else{pastureSilver[r][c]=0;}
-            //System.out.print(line.charAt(c));
-         }
-     }
-
-     int startR=directions.nextInt()-1;
-     int startC=directions.nextInt()-1;
-     pastureSilver[startR][startC]=1;
-     temp1=pastureSilver.clone();
-
-
-     System.out.println(visual(temp1));
-     System.out.println(visual(pastureSilver));
-
-         /*for (int r1=0;r1<temp1.length;r1++){
-           for (int c1=0;c1<temp1[r1].length;c1++){
-             pastureSilver[r1][c1]=temp1[r1][c1];
+    for (int r=0;r<N;r++){
+    line = directions.nextLine();
+        for (int c=0;c<M;c++){  //adding values to pasture from the big block of numbers
+            if (line.charAt(c)=='*'){
+               pastureSilver[r][c]=-1;
            }
-         }*/
-      //}
+           else{pastureSilver[r][c]=0;}
+           //System.out.print(line.charAt(c));
+        }
+    }
 
-     return pastureSilver[0][0];
- }
+    int startR=directions.nextInt()-1;
+    int startC=directions.nextInt()-1;
+    int endR=directions.nextInt()-1;
+    int endC=directions.nextInt()-1;
+
+
+    pastureSilver[startR][startC] = 1;
+    int[][] temp = new int[pastureSilver.length][pastureSilver[0].length];
+    for (int t = 0; t < T; t++) {
+        for (int r = 0; r < pastureSilver.length; r++) {
+            for (int c = 0; c < pastureSilver[r].length; c++) {
+
+                if (pastureSilver[r][c] >= 0) {
+                    if (c - 1 >= 0 && pastureSilver[r][c-1] > 0) {
+                      temp[r][c] += pastureSilver[r][c-1];
+                    }
+                    if (c + 1 < pastureSilver[r].length && pastureSilver[r][c+1] > 0) {
+                      temp[r][c] += pastureSilver[r][c+1];
+                    }
+                    if (r - 1 >= 0 && pastureSilver[r-1][c] > 0) {
+                      temp[r][c] += pastureSilver[r-1][c];
+                    }
+                    if (r + 1 < pastureSilver.length && pastureSilver[r+1][c] > 0) {
+                      temp[r][c] += pastureSilver[r+1][c];
+                    }
+                }
+                else {
+                    temp[r][c] = -1;
+                }
+          }
+      }
+      pastureSilver = temp.clone();
+      temp = new int[pastureSilver.length][pastureSilver[0].length];
+    }
+    return pastureSilver[endR][endC];
+    }
+
+
+
 
 
  public static String visual(int[][] t){
    String visual = "";
    for (int r=0;r<t.length;r++){
      for (int c=0;c<t[r].length;c++){
-       visual = visual +t[r][c] + " ";
+       visual = visual +t[r][c] + "   ";
      }
      visual+="\n";
    }
